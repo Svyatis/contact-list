@@ -4,7 +4,7 @@
   "description": "Start seed for building component base application based on angular 1.5 and webpack",
   "main": "entry.js",
   "scripts": {
-    "server": "webpack-dev-server --history-api-fallback --inline --progress --hot --host 0.0.0.0 --port 8999",
+    "server": "webpack-dev-server --history-api-fallback --inline --progress --hot --host 0.0.0.0 --port 8888",
     "start": "npm run server"
   },
   "author": "Vladyslav Bezruchko",
