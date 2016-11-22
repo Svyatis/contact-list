@@ -1,0 +1,22 @@
+{
+  "name": "angular_es5_webpack",
+  "version": "1.0.0",
+  "description": "Start seed for building component base application based on angular 1.5 and webpack",
+  "main": "entry.js",
+  "scripts": {
+    "server": "webpack-dev-server --history-api-fallback --inline --progress --hot --host 0.0.0.0 --port 8999",
+    "start": "npm run server"
+  },
+  "author": "Vladyslav Bezruchko",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "angular": "^1.5.5",
+    "@angular/router": "^0.2.0"
+  }
+}
