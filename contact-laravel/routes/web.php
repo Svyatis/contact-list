@@ -14,7 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::group(['prefix' => 'api/v1', 'namespace' => 'v1', 'middleware' => 'cors'], function() {
-    Route::resource('contact', 'ContactController@index');
-});

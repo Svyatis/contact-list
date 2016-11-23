@@ -18,4 +18,8 @@ function ContactsService($resource, API_URL) {
     this.getContacts = function() {
         return $resource(API_URL + 'contact')
     };
+
+    this.sendContact = function(params) {
+        return $resource(API_URL + 'add-contact', params, {post: {method: "POST"}})
+    }
 }

@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::group(['namespace' => 'v1', 'middleware' => 'cors'], function() {
+    Route::get('contact', 'ContactController@index');
+    Route::post('add-contact', 'ContactController@store');
+});
+
+Route::get('test', function() {
+    return response('success', 200);
+});

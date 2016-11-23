@@ -12,5 +12,5 @@ angular.module('app',
     .config(function($locationProvider) {
     $locationProvider.html5Mode(true);
     })
-    .constant('API_URL', 'http://localhost:8000/api/v1/')
+    .constant('API_URL', 'http://localhost:8000/api/')
     .value('$routerRootComponent', 'appMain');

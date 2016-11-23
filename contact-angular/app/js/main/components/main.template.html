@@ -41,7 +41,7 @@
             </div>
             <div class="modal-body">
 
-                <form name="requestTraining">
+                <form name="contactAdd">
                     <div class="form-group">
                         <label for="name">
                             Name:
@@ -52,7 +52,12 @@
                                 id="name"
                                 class="form-control"
                                 required>
-                        </input>
+                        <div ng-show="contactAdd.name.$touched">
+                        <div class="alert-request-error alert-warning"
+                             ng-show="contactAdd.name.$error.required">
+                            Please, select your reason for participation
+                        </div>
+                            </div>
                     </div>
 
                     <div class="form-group">
@@ -86,7 +91,7 @@
                             Info:
                         </label>
                         <textarea
-                                name="name"
+                                name="info"
                                 rows="5"
                                 ng-model="contactData.info"
                                 id="info"
@@ -106,7 +111,7 @@
                                class="form-control"
                                placeholder="yyyy-MM-dd"
                                min="1950-01-01"
-                               max="2005-12-31"
+                               max="theDate"
                                required>
                         </input>
                     </div>
@@ -123,8 +128,13 @@
                 <input  type="submit"
                         class="btn btn-primary btn-sm"
                         value="Submit"
+                        ng-disabled="contactAdd.name.$invalid ||
+                                     contactAdd.surname.$invalid ||
+                                     contactAdd.phone.$invalid ||
+                                     contactAdd.info.$invalid ||
+                                     contactAdd.bday.$invalid"
                         data-dismiss="modal"
-                        ng-click="$ctrl.sendRequest(contactData)">
+                        ng-click="$ctrl.addContact(contactData)">
             </div>
 
         </div>

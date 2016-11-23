@@ -29,7 +29,6 @@ class ContactController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
-        \Log::info($allContacts);
         return response()->json([
             'allContacts' => $allContacts
         ]);
@@ -53,7 +52,18 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->contactRepo->addContact($request);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => $e->getCode(),
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            'status' => 200
+        ]);
     }
 
     /**
