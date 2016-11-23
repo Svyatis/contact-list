@@ -1,1 +1,20 @@
-<div class="page-header">Main Component</div>
+    <table class="table">
+        <thead>
+        <tr class="success">
+            <th class="col-sm-1">Firstname</th>
+            <th class="col-sm-1">Lastname</th>
+            <th class="col-sm-2">Phone</th>
+            <th class="col-sm-2">Date of Birth</th>
+            <th class="col-sm-6">Info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="contact in $ctrl.contacts">
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.surname }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.birthday }}</td>
+            <td>{{ contact.info }}</td>
+        </tr>
+        </tbody>
+    </table>

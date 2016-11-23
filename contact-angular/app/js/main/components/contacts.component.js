@@ -4,28 +4,11 @@
  * Export contactsComponent
  */
 module.exports = angular
-    .module('mainModule.contactsComponent', ['ngResource'])
-    .component('appMain', {
-        template: '<h1>Main</h1><ng-outlet></ng-outlet>',
-        controller: MainCtrl,
-        transclude: true,
-        $routeConfig:
-          [
-            {path: '/contacts', name: 'Contacts', component: 'contactsComponent', useAsDefault: true}
-          ]
-    })
+    .module('mainModule.contactsComponent', [])
     .component('contactsComponent', {
         templateUrl: 'app/js/main/components/contacts.template.html',
         controller: ContactCtrl
     });
-
-    /**
-     * @name MainCtrl
-     * @memberOf mainModule
-     */
-    function MainCtrl(){
-        //
-    }
 
     /**
      * @name ContactCtrl
@@ -37,6 +20,5 @@ module.exports = angular
 
         ContactsService.getContacts().get().$promise.then(function (data) {
             ctrl.contacts = data.allContacts;
-            console.log(ctrl.contacts);
         });
     }

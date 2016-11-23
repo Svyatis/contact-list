@@ -1,0 +1,134 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Contacts List</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <a data-toggle="modal"
+                   data-target="#submit_request"
+                   id="myModalShow"
+                   class="btn btn-success btn-sm pull-right btn-submit myIconSm">
+                    <span id="addButton">Add contact</span>
+                </a>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!--MODAL WINDOW OPENED WITH BUTTON "JOIN"-->
+<div class="modal fade" id="submit_request" role="dialog">
+    <div class="modal-dialog">
+        <!----------------- MODAL WINDOW CONTENT---------------->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Add contacts to list:
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="requestTraining">
+                    <div class="form-group">
+                        <label for="name">
+                            Name:
+                        </label>
+                        <input  type="text"
+                                name="name"
+                                ng-model="contactData.name"
+                                id="name"
+                                class="form-control"
+                                required>
+                        </input>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">
+                            Surname:
+                        </label>
+                        <input  type="text"
+                                name="surname"
+                                ng-model="contactData.surname"
+                                id="surname"
+                                class="form-control"
+                                required>
+                        </input>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            Phone:
+                        </label>
+                        <input  type="text"
+                                name="phone"
+                                ng-model="contactData.phone"
+                                id="phone"
+                                class="form-control"
+                                required>
+                        </input>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="info">
+                            Info:
+                        </label>
+                        <textarea
+                                name="name"
+                                rows="5"
+                                ng-model="contactData.info"
+                                id="info"
+                                class="form-control"
+                                required>
+                        </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bday">
+                            Birthday:
+                        </label>
+                        <input type="date"
+                               name="bday"
+                               ng-model="contactData.bday"
+                               id="bday"
+                               class="form-control"
+                               placeholder="yyyy-MM-dd"
+                               min="1950-01-01"
+                               max="2005-12-31"
+                               required>
+                        </input>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-no-background btn-sm"
+                        data-dismiss="modal"
+                        ng-click="$ctrl.removeRequest()">
+                    Cancel
+                </button>
+                <input  type="submit"
+                        class="btn btn-primary btn-sm"
+                        value="Submit"
+                        data-dismiss="modal"
+                        ng-click="$ctrl.sendRequest(contactData)">
+            </div>
+
+        </div>
+    </div>
+</div><!--END OF THE MODAL WINDOW OPENED WITH BUTTON "JOIN"-->
+
+<ng-outlet></ng-outlet>
