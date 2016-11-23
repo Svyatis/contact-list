@@ -1,4 +1,4 @@
-    <table class="table">
+    <table class="table-hover table table-responsive">
         <thead>
         <tr class="success">
             <th class="col-sm-1">Firstname</th>
@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="contact in $ctrl.contacts">
+        <tr ng-repeat="contact in $ctrl.contacts" ng-click="$ctrl.go(contact)">
             <td>{{ contact.name }}</td>
             <td>{{ contact.surname }}</td>
             <td>{{ contact.phone }}</td>

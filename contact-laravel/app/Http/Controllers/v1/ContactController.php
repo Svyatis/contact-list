@@ -68,13 +68,23 @@ class ContactController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        logger($id);
+        try {
+            $contactDetail = $this->contactRepo->contactDetail($id);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => $e->getCode(),
+                'error' => $e->getMessage()
+            ]);
+        }
+        return response()->json([
+            'contactDetail' => $contactDetail
+        ]);
     }
 
     /**

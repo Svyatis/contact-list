@@ -30,6 +30,10 @@ class ContactRepository
         return $this->model->all();
     }
 
+    /**
+     * PostRepository constructor.
+     * @param Contact $request
+     */
     public function addContact($request)
     {
         $createdAt = Carbon::parse($request->get('bday'));
@@ -43,5 +47,14 @@ class ContactRepository
             'birthday' => $date
         ];
         $this->model->create($contact);
+    }
+
+    /**
+     * @param Contact $id
+     * @return mixed
+     */
+    public function contactDetail($id)
+    {
+        return $this->model->find($id);
     }
 }

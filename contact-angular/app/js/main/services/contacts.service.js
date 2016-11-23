@@ -19,6 +19,10 @@ function ContactsService($resource, API_URL) {
         return $resource(API_URL + 'contact')
     };
 
+    this.getDetail = function(id) {
+        return $resource(API_URL + 'contact/' + id);
+    };
+
     this.sendContact = function(params) {
         return $resource(API_URL + 'add-contact', params, {post: {method: "POST"}})
     }

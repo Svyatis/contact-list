@@ -15,10 +15,16 @@ module.exports = angular
      * @param ContactsService
      * @memberOf mainModule
      */
-    function ContactCtrl(ContactsService) {
-        var ctrl = this;
+    function ContactCtrl(ContactsService, $location) {
+        var $ctrl = this;
 
         ContactsService.getContacts().get().$promise.then(function (data) {
-            ctrl.contacts = data.allContacts;
+            $ctrl.contacts = data.allContacts;
+            console.log($ctrl.contacts);
         });
+
+        $ctrl.go = function(contact) {
+            var hash = '/contact/' + contact.id;
+            $location.path(hash);
+        };
     }

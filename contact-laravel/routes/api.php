@@ -19,9 +19,6 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'v1', 'middleware' => 'cors'], function() {
     Route::get('contact', 'ContactController@index');
+    Route::get('contact/{id}', 'ContactController@show');
     Route::post('add-contact', 'ContactController@store');
-});
-
-Route::get('test', function() {
-    return response('success', 200);
 });
