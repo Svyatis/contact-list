@@ -1,7 +1,10 @@
-var angular = require('angular'),
-    mainComponent = require('./components/main.component.js');
+var angular =   require('angular');
+                require('./components/contacts.component.js');
+                require('./services/contacts.service.js');
 
-module.exports = angular.module("app.main", [
+module.exports = angular.module("mainModule", [
     // components
-    mainComponent.name
+    'mainModule.contactsComponent',
+    // services
+    'mainModule.contactsService'
 ]);

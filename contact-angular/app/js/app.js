@@ -1,13 +1,16 @@
-var angular = require('angular'),
-    mainModule = require('./main/main.module.js');
+var angular = require('angular');
+    require('./main/main.module.js');
     require('@angular/router/angular1/angular_1_router');
+    require('angular-resource');
 
 angular.module('app',
     [
-      mainModule.name,
-      'ngComponentRouter'
+        'mainModule',
+        'ngComponentRouter',
+        'ngResource'
     ])
-  .config(function($locationProvider) {
+    .config(function($locationProvider) {
     $locationProvider.html5Mode(true);
-  })
-  .value('$routerRootComponent', 'appMain');
+    })
+    .constant('API_URL', 'http://localhost:8000/api/v1/')
+    .value('$routerRootComponent', 'appMain');
