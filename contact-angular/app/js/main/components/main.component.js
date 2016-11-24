@@ -20,9 +20,14 @@ module.exports = angular
      * @name MainCtrl
      * @memberOf mainModule
      */
-    function MainCtrl(ContactsService) {
+    function MainCtrl(ContactsService, Notification, moment) {
         var $ctrl = this;
 
+        /**
+         * @name function removeRequest
+         * @desc clearing modal form on cancel button click
+         * @memberOf MainCtrl
+         */
         $ctrl.removeRequest = function(contactData) {
             contactData.name = '';
             contactData.surname = '';
@@ -32,35 +37,37 @@ module.exports = angular
             return contactData;
         };
 
-        $(document).ready(function() {
-            var date = new Date();
+        /**
+         * @name function changeMaxDate
+         * @desc set max date of birth for adding contact validation
+         * @memberOf MainCtrl
+         */
+        $ctrl.changeMaxDate = function() {
+            $(document).ready(function () {
+                var today = moment().format("YYYY-MM-DD");
+                $("#bday").attr("max", today);
+                console.log(today);
+            });
+        };
 
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-
-            if (month < 10) month = "0" + month;
-            if (day < 10) day = "0" + day;
-
-            var today = year + "-" + month + "-" + day;
-            $("#bday").attr("max", today);
-        });
-
+        /**
+         * @name function addContact
+         * @desc sends request to rest for creating new contact
+         * @memberOf MainCtrl
+         */
         $ctrl.addContact = function(contactData) {
-            console.log(contactData);
             ContactsService.sendContact(contactData).post().$promise.then(function (response) {
                 if (response.status === 200) {
-                    alert('success');
-                    // Notification.success({message: "<p style='padding: 20px'>Request has been submitted! " +
-                    // "<a href='#' " + "class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    // "</p>", delay: 5000});
+                    Notification.success({message: "<p style='padding: 20px'>" +
+                    "Contact has been successfully added to your contact list! " +
+                    "<a href='#' " + "class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "</p>", delay: 5000});
                 }
                 else {
-                    alert(response);
-                    // Notification.error({message: "<p style='padding: 20px'>" + response.error +
-                    // "<a href='#' " + "class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    // "</p>", delay: 5000});
+                    Notification.error({message: "<p style='padding: 20px'>" + response.error +
+                    "<a href='#' " + "class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "</p>", delay: 5000});
                 }
             })
-        }
+        };
     }

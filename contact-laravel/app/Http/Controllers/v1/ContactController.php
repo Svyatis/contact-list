@@ -47,22 +47,31 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         try {
             $this->contactRepo->addContact($request);
+            $contacts = $this->contactRepo->getAll();
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => $e->getCode(),
-                'error' => $e->getMessage()
-            ]);
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 407,
+                    'error' => 'This phone number already exists in your contacts please provide different number'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => $e->getCode(),
+                    'error' => $e->getMessage()
+                ]);
+            }
         }
 
         return response()->json([
-            'status' => 200
+            'status' => 200,
+            'contacts' => $contacts
         ]);
     }
 
@@ -73,7 +82,6 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        logger($id);
         try {
             $contactDetail = $this->contactRepo->contactDetail($id);
         } catch (\Exception $e) {
@@ -102,12 +110,23 @@ class ContactController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->contactRepo->updateContact($request, $id);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => $e->getCode(),
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            'status' => 200
+        ]);
     }
 
     /**

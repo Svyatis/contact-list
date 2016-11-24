@@ -1,45 +1,131 @@
-<h1>Detail</h1>
+<h1 class="header">Contact Detail</h1>
 <div class="container">
-<table class="table-hover">
-    <tr>
-        <td class="col-sm-2">
-            Name:
-        </td>
-        <td>
-            {{$ctrl.contact.name}}
-        </td>
-    </tr>
-    <tr>
-        <td class="col-sm-2">
-            Surname:
-        </td>
-        <td>
-            {{$ctrl.contact.surname}}
-        </td>
-    </tr>
-    <tr>
-        <td class="col-sm-2">
-            Phone:
-        </td>
-        <td>
-            {{$ctrl.contact.phone}}
-        </td>
-    </tr>
-    <tr>
-        <td class="col-sm-2">
-            Info:
-        </td>
-        <td>
-            {{$ctrl.contact.info}}
-        </td>
-    </tr>
-    <tr>
-        <td class="col-sm-2">
-            Birthday:
-        </td>
-        <td>
-            {{$ctrl.contact.birthday}}
-        </td>
-    </tr>
-</table>
+    <div class="col-md-2">
+        <h3>Name:</h3>
+        <h3>Surname:</h3>
+        <h3>Phone:</h3>
+        <h3>Date of Birth:</h3>
+        <h3>Info:</h3>
+    </div>
+    <div class="col-md-6">
+    <form name="editContact">
+        <div class="form-group">
+            <span ng-hide="$ctrl.editmode"><h3>{{$ctrl.contact.name}}</h3></span>
+            <div class="form-group" ng-show="$ctrl.editmode">
+                <input type="text"
+                       id="name"
+                       class="form-control moder"
+                       placeholder="{{$ctrl.contact.name}}"
+                       ng-model="$ctrl.contact.name"
+                       ng-value="$ctrl.contact.name"
+                       name="name"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span ng-hide="$ctrl.editmode"><h3>{{$ctrl.contact.surname}}</h3></span>
+            <div class="form-group" ng-show="$ctrl.editmode">
+                <input type="text"
+                       id="surname"
+                       class="form-control moder"
+                       placeholder="{{$ctrl.contact.surname}}"
+                       ng-model="$ctrl.contact.surname"
+                       ng-value="$ctrl.contact.surname"
+                       name="surname"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span ng-hide="$ctrl.editmode"><h3>{{$ctrl.contact.phone}}</h3></span>
+            <div class="form-group" ng-show="$ctrl.editmode">
+                <input type="text"
+                       id="phone"
+                       class="form-control moder"
+                       placeholder="{{$ctrl.contact.phone}}"
+                       ng-model="$ctrl.contact.phone"
+                       ng-value="$ctrl.contact.phone"
+                       name="phone"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span ng-hide="$ctrl.editmode"><h3>{{$ctrl.contact.birthday | date:'yyyy-MM-dd'}}</h3></span>
+            <div class="form-group" ng-show="$ctrl.editmode">
+                <input type="text"
+                       id="birthday"
+                       class="form-control moder"
+                       placeholder="{{$ctrl.contact.birthday | date:'yyyy-MM-dd'}}"
+                       ng-model="$ctrl.contact.birthday"
+                       ng-value="$ctrl.contact.birthday"
+                       name="birthday"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span ng-hide="$ctrl.editmode"><h3>{{$ctrl.contact.info}}</h3></span>
+            <div class="form-group" ng-show="$ctrl.editmode">
+                <textarea  id="info"
+                           rows="3"
+                           class="form-control moder"
+                           placeholder="{{$ctrl.contact.info}}"
+                           ng-model="$ctrl.contact.info"
+                           ng-value="$ctrl.contact.info"
+                           name="info">
+                </textarea>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div ng-show="editContact.name.$touched">
+                <div class="form-control alert-info moder"
+                     ng-show="editContact.name.$error.required">
+                    Name is required !
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div ng-show="editContact.surname.$touched">
+                <div class="form-control alert-info moder"
+                     ng-show="editContact.surname.$error.required">
+                   Surname is required !
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div ng-show="editContact.phone.$touched">
+                <div class="form-control alert-info moder"
+                     ng-show="editContact.phone.$error.required">
+                    Phone is required !
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div ng-show="editContact.birthday.$touched">
+                <div class="form-control alert-info moder"
+                     ng-show="editContact.birthday.$error.required">
+                    Date of birth is required !
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="editButtons">
+    <button class="btn btn-primary editable"
+            ng-hide="$ctrl.editmode"
+            ng-click="$ctrl.toggle()">Edit</button>
+    <button type="submit"
+            class="btn btn-primary editableCancel"
+            ng-show="$ctrl.editmode"
+            ng-disabled="editContact.name.$invalid ||
+                         editContact.surname.$invalid ||
+                         editContact.phone.$invalid ||
+                         editContact.birthday.$invalid"
+            ng-click="$ctrl.save($ctrl.contact)">Save</button>
+    <button class="btn btn-info editableCancel" ng-show="$ctrl.editmode" ng-click="$ctrl.toggle()">Cancel</button>
+    </div>
 </div>

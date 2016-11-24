@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Entities\Contact;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class ContactRepository
 {
@@ -38,12 +37,13 @@ class ContactRepository
     {
         $createdAt = Carbon::parse($request->get('bday'));
         $date = $createdAt->format('Y-m-d');
+        $info = $request->get('info') ? $request->get('info') : "";
 
         $contact = [
             'name' => $request->get('name'),
             'surname' => $request->get('surname'),
             'phone' => $request->get('phone'),
-            'info' => $request->get('info'),
+            'info' => $info,
             'birthday' => $date
         ];
         $this->model->create($contact);
@@ -56,5 +56,24 @@ class ContactRepository
     public function contactDetail($id)
     {
         return $this->model->find($id);
+    }
+
+    /**
+     * @param Contact $request
+     * @param Contact $id
+     * @return mixed
+     */
+    public function updateContact($request, $id)
+    {
+        $name = $request->get('name');
+        $surname = $request->get('surname');
+        $phone = $request->get('phone');
+        $info = $request->get('info') ? $request->get('info') : "";
+        $birthdate = $request->get('birthdate');
+        $data = ['name' => $name, 'surname' => $surname, 'phone' => $phone,
+                 'info' => $info, 'birthdate' => $birthdate];
+        $myData = $this->model->findOrFail($id);
+
+        return $myData->update($data);
     }
 }

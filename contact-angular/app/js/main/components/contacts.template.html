@@ -1,20 +1,25 @@
-    <table class="table-hover table table-responsive">
-        <thead>
-        <tr class="success">
-            <th class="col-sm-1">Firstname</th>
-            <th class="col-sm-1">Lastname</th>
-            <th class="col-sm-2">Phone</th>
-            <th class="col-sm-2">Date of Birth</th>
-            <th class="col-sm-6">Info</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="contact in $ctrl.contacts" ng-click="$ctrl.go(contact)">
-            <td>{{ contact.name }}</td>
-            <td>{{ contact.surname }}</td>
-            <td>{{ contact.phone }}</td>
-            <td>{{ contact.birthday }}</td>
-            <td>{{ contact.info }}</td>
-        </tr>
-        </tbody>
-    </table>
+<table class="table-hover table table-responsive">
+    <thead>
+    <tr class="success">
+        <th class="col-sm-1">ID</th>
+        <th class="col-sm-1">Firstname</th>
+        <th class="col-sm-1">Lastname</th>
+        <th class="col-sm-2">Phone</th>
+        <th class="col-sm-2">Date of Birth</th>
+        <th class="col-sm-5">Info</th>
+    </tr>
+    </thead>
+    <tbody id="contactsTable">
+    <tr ng-repeat="contact in $ctrl.contacts | orderBy: 'name'"
+        ng-click="$ctrl.go(contact)"
+        ng-init="$ctrl.checkDate(contact.birthday, contact.id)"
+        ng-class="$ctrl.class" id="{{'el' + contact.id}}">
+        <td>{{contact.id}}</td>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.surname }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.birthday | date:'yyyy-MM-dd'}}</td>
+        <td>{{ contact.info }}</td>
+    </tr>
+    </tbody>
+</table>
