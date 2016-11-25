@@ -47,13 +47,13 @@ module.exports = angular
         $ctrl.checkDate = function(date, id) {
             $ctrl.birthday = date.substring(5);
             $ctrl.current = $ctrl.filterDate($ctrl.current, 0);
-            $ctrl.minusFiveDays = $ctrl.filterDate($ctrl.minusFiveDays, 5);
-            $ctrl.minusTenDays = $ctrl.filterDate($ctrl.minusTenDays, 10);
-            if ($ctrl.birthday >= $ctrl.minusFiveDays && $ctrl.birthday <= $ctrl.current) {
+            $ctrl.plusFiveDays = $ctrl.filterDate($ctrl.plusFiveDays, 5);
+            $ctrl.plusTenDays = $ctrl.filterDate($ctrl.plusTenDays, 10);
+            if ($ctrl.birthday >= $ctrl.current && $ctrl.birthday <= $ctrl.plusFiveDays) {
                 $(document).ready(function(){
                     $("#el"+id).attr("class", "danger");
                 });
-            } else if ($ctrl.birthday >= $ctrl.minusTenDays && $ctrl.birthday <= $ctrl.current) {
+            } else if ($ctrl.birthday > $ctrl.plusFiveDays && $ctrl.birthday <= $ctrl.plusTenDays) {
                 $(document).ready(function(){
                     $("#el"+id).attr("class", "warning");
                 });
@@ -66,9 +66,9 @@ module.exports = angular
          * @desc create and format dates for comparing
          * @memberOf ContactCtrl
          */
-        $ctrl.filterDate = function(data, minusDays) {
+        $ctrl.filterDate = function(data, plusDays) {
             data = new Date();
-            data.setDate(data.getDate() - minusDays);
+            data.setDate(data.getDate() + plusDays);
             data = moment(data).format('YYYY-MM-DD');
             data = data.substring(5);
             return data;
